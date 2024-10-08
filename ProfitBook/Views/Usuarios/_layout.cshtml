@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProfitBook</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProfitBook.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex align-items-center vh-100">
+    <div class="container text-center text-md-start">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
+                <div class="text-center mb-3">
+                    <img src="~/images/ProfitBook.png" alt="ProfitBook" class="profitbook-logo img-fluid d-block mx-auto">
+                </div>
+                <h1 class="display-6 text-md-start text-center"><strong>ProfitBook</strong> - Gestión Inteligente de Finanzas</h1>
+                <p class="lead text-justify text-md-start">
+                    Bienvenido a <strong>ProfitBook</strong>, la herramienta ideal para gestionar tus finanzas de manera
+                    fácil y eficiente. Registra, analiza tus transacciones y controla tus inversiones en un solo lugar.
+                </p>
+            </div>
+            <div class="col-12 col-md-6">
+                <main role="main" class="pb-3">@RenderBody()</main>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

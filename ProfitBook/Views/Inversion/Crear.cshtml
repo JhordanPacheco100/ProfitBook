@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Productos>
+
+@{
+    ViewData["Title"] = "Crear Inversión";
+    var fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<h2>Crear Inversión</h2>
+
+<form asp-action="Crear" method="post">
+    <div class="form-group">
+        <label for="Fecha">Fecha</label>
+        <input type="date" class="form-control" id="Fecha" name="Fecha" value="@fechaActual" required />
+    </div>
+    <div class="table-responsive">
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th class="d-none d-md-table-cell">Saldo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <td>
+                            @producto.Nombre
+                            <input type="hidden" name="ProductoId" value="@producto.Id" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control cantidad" name="Cantidad" step="0.01" value="1" required />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control precio-unitario" name="PrecioUnitario" step="0.01" value="0" required />
+                        </td>
+                        <td>
+                            <input type="hidden" class="form-control total" name="Total" value="0" />
+                            <span class="total-text">0</span>
+                        </td>
+                        <td class="d-none d-md-table-cell">
+                            <input type="number" class="form-control saldo" name="Saldo" value="0" readonly />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger eliminar">X</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="form-group mt-2">
+        <label for="TotalInversion">Total de la Inversión</label>
+        <input type="text" class="form-control" id="TotalInversion" readonly />
+    </div>
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary mr-2">Insertar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function calcularTotal() {
+                let totalInversion = 0;
+                $('tbody tr').each(function () {
+                    const cantidad = parseFloat($(this).find('.cantidad').val()) || 1;
+                    const precioUnitario = parseFloat($(this).find('.precio-unitario').val()) || 0;
+                    const total = cantidad * precioUnitario;
+                    $(this).find('.total').val(total.toFixed(2));
+                    $(this).find('.total-text').text(total.toFixed(2));
+                    $(this).find('.saldo').val(total.toFixed(2)); // Asignar total a saldo
+                    totalInversion += total;
+                });
+                $('#TotalInversion').val(totalInversion.toFixed(2));
+            }
+
+            $(document).on('input', '.cantidad, .precio-unitario', function () {
+                calcularTotal();
+            });
+
+            $(document).on('click', '.eliminar', function () {
+                $(this).closest('tr').remove();
+                calcularTotal();
+            });
+
+            // Inicializar el cálculo del total al cargar la página
+            calcularTotal();
+        });
+    </script>
+}

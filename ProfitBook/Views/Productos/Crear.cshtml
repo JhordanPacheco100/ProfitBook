@@ -1,0 +1,33 @@
+﻿@model Productos
+
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<h1>Registrar Producto</h1>
+<p>Ingresa los productos en los que inviertes y selecciona el tipo de operación como gasto.</p>
+
+<form asp-action="Crear" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" placeholder="Nombre del producto" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TipoOperacionId" class="form-label"></label>
+        <select asp-for="TipoOperacionId" asp-items="Html.GetEnumSelectList<TipoOperacion>()" class="form-select">
+            <option value="">Selecciona el tipo de operación</option> <!-- Opción por defecto -->
+        </select>
+        <span asp-validation-for="TipoOperacionId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-4">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

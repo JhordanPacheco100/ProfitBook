@@ -1,0 +1,46 @@
+﻿@model AbonoViewModel
+@{
+    ViewData["Title"] = "Abonar";
+}
+
+<h2>Abonar</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successMessage">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<form asp-action="Abonar" method="post">
+    <div class="row mb-3">
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="fechaSeleccionada">Selecciona una fecha</label>
+                <select asp-for="FechaSeleccionada" class="form-control">
+                    <option value="">Seleccione una fecha</option>
+                    @foreach (var fecha in Model.FechasDisponibles)
+                    {
+                        <option value="@fecha.ToString("yyyy-MM-dd")">@fecha.ToString("yyyy-MM-dd")</option>
+                    }
+                </select>
+                <span asp-validation-for="FechaSeleccionada" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Cargar</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            if ($('#successMessage').length) {
+                setTimeout(function () {
+                    $('#successMessage').alert('close');
+                }, 2000);
+            }
+        });
+
+    </script>
+}

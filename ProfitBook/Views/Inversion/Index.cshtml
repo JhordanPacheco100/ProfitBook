@@ -1,0 +1,85 @@
+﻿@model InversionIndexViewModel
+
+@{
+    ViewData["Title"] = "Inversion";
+}
+
+<h2>Inversiones</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<p>
+    En este apartado podras Registar una Inversion de Productos que compraste a Mayoreo, para posteriormente pagar en 
+    pequeños abonos que contaran como un gasto de inversion.
+</p>
+<p>
+    <a asp-action="Crear" class="btn btn-primary">Crear</a>
+</p>
+
+<form asp-action="CargarInversionesPorFecha" method="post">
+    <div class="row mb-3">
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="fechaSeleccionada">Seleccione una Fecha</label>
+                <select class="form-select" id="fechaSeleccionada" name="fechaSeleccionada">
+                    <option selected disabled>Seleccione una fecha</option>
+                    @foreach (var fecha in Model.FechasDisponibles)
+                    {
+                        <option value="@fecha.ToString("yyyy-MM-dd")">@fecha.ToString("yyyy-MM-dd")</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-secondary w-100">Cargar</button>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th class="d-none d-md-table-cell">Id</th>
+                <th>Producto</th>
+                <th class="d-none d-md-table-cell">Cantidad</th>
+                <th class="d-none d-md-table-cell">Precio Unitario</th>
+                <th>Total</th>
+                <th>Saldo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inversion in Model.Inversiones)
+            {
+                <tr>
+                    <td class="d-none d-md-table-cell">@inversion.Id</td>
+                    <td>@inversion.ProductoNombre</td>
+                    <td class="d-none d-md-table-cell">@inversion.Cantidad</td>
+                    <td class="d-none d-md-table-cell">@inversion.PrecioUnitario</td>
+                    <td>@inversion.Total</td>
+                    <td>@inversion.Saldo</td>
+                    <td>@inversion.Fecha.ToString("yyyy-MM-dd")</td>
+                    <td>@inversion.Estado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            if ($('#successMessage').length) {
+                setTimeout(function () {
+                    $('#successMessage').alert('close');
+                }, 2000);
+            }
+        });
+    </script>
+}

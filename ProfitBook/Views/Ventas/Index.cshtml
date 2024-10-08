@@ -1,0 +1,18 @@
+﻿@model VentasIndexViewModel
+
+@{
+    ViewData["Title"] = "Ventas";
+}
+
+<h2>Detalles de Ventas</h2>
+
+<partial name="_Submenu" Model="SubMenuTransacciones.Diario" />
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <partial name="_DateNavigation" model="Model.DateNavigation" />
+    <a asp-action="Crear" class="btn btn-success">
+        <i class="bi bi-plus-lg"></i> Registrar Venta
+    </a>
+</div>
+
+<partial name="_ReporteTransaccionesVenta" model="Model.ResumenVentas" />

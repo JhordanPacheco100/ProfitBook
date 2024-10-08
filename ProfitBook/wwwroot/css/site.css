@@ -1,0 +1,30 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Estilos para la imagen de ProfitBook */
+.profitbook-logo {
+    width: 100px; /* Tamaño por defecto para pantallas pequeñas */
+}
+
+/* A partir de pantallas medianas (768px), ajusta el tamaño */
+@media (min-width: 768px) {
+    .profitbook-logo {
+        width: 250px; /* Tamaño para pantallas grandes */
+    }
+}

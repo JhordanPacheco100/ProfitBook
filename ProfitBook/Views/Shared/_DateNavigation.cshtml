@@ -1,0 +1,11 @@
+﻿@model DateNavigationViewModel
+
+<div class="date-navigation">
+    <a asp-action="@Model.ActionName" asp-route-mes="@Model.MesAnterior" asp-route-año="@Model.AñoAnterior" class="btn btn-secondary">
+        <i class="bi-chevron-left"></i>
+    </a>
+    <span>@Model.FechaActual.ToString("MMM") - @Model.FechaActual.Year</span>
+    <a asp-action="@Model.ActionName" asp-route-mes="@Model.MesPosterior" asp-route-año="@Model.AñoPosterior" class="btn btn-secondary">
+        <i class="bi-chevron-right"></i>
+    </a>
+</div>

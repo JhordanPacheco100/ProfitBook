@@ -1,0 +1,102 @@
+﻿@model VentasIndexViewModel
+
+@{
+    ViewData["Title"] = "Home";
+    var mesActual = DateTime.Now.ToString("MMMM");
+}
+
+<div class="container my-4">
+    <div class="text-center mb-4">
+        <h1 class="display-6">Reporte Anual de Ventas</h1>
+        <p class="text-muted">Datos actualizados del año @Model.Año</p>
+    </div>
+
+    <div class="row text-center g-3">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Ventas Totales</h5>
+                    <h2 class="card-text text-primary">@Model.TotalVentas.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Inversiones Totales</h5>
+                    <h2 class="card-text text-dark">@Model.TotalInversion.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary">Ganancias Totales</h5>
+                    <h2 class="card-text text-success">@Model.TotalGanancia.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="display-6">Resumen de @mesActual</h2>
+        <p class="text-muted">Estadísticas del mes actual</p>
+    </div>
+
+    <div class="row text-center g-3 mb-4">
+        <div class="col-12 col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Días Trabajados</h5>
+                    <h2 class="card-text text-dark"><i class="bi bi-calendar3"></i> @Model.EstadisticasMensuales.DiasTrabajados</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Ventas Totales</h5>
+                    <h2 class="card-text text-dark"><i class="bi bi-bar-chart-line"></i> @Model.EstadisticasMensuales.VentasTotales.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Inversiones Totales</h5>
+                    <h2 class="card-text text-dark"><i class="bi bi-piggy-bank"></i> @Model.EstadisticasMensuales.InversionesTotales.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Ganancias Totales</h5>
+                    <h2 class="card-text text-dark"><i class="bi bi-cash"></i> @Model.EstadisticasMensuales.GananciasTotales.ToString("C")</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body text-center">
+                    <h4 class="card-title text-dark">Record venta mas alto</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="text-dark"><i class="bi bi-calendar-event"></i> Mes: <strong>@Model.RecordsDeVentas.Mes</strong></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-dark"><i class="bi bi-bar-chart-line-fill"></i> Total Ventas: <strong class="text-primary">@Model.RecordsDeVentas.TotalVentas.ToString("C")</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

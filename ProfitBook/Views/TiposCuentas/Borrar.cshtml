@@ -1,0 +1,25 @@
+﻿@model TipoCuenta
+
+@{
+    ViewData["Title"] = "Borrar Tipo Cuenta";
+}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body text-center">
+            <h3 class="mb-3 text-dark">¿Está seguro que desea borrar el tipo de cuenta <strong>@Model.Nombre</strong>?</h3>
+            <p class="text-dark">Esta acción no se puede deshacer.</p>
+            <div class="d-flex justify-content-center">
+                <form asp-action="BorrarTipoCuenta" method="post" class="me-2">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger btn-lg">Borrar</button>
+                </form>
+                <a class="btn btn-secondary btn-lg" asp-action="Index">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
